@@ -1,11 +1,19 @@
 import React from "react";
+import {connect} from "react-redux";
 
-const List = ()=>{
+const mapStateToProps = (state) =>{
+    return {articles: state.articles}
+}
+
+const List = (props)=>{
+    const {articles} = props;
     return (
-        <div>
-            <h2>This is List</h2>
-            </div>
+        <ul>
+            {articles.map((article,index)=>{
+               return  <li key={index}>{article.title}</li>
+            })}
+            </ul>
     )
 }
 
-export default List;
+export default connect(mapStateToProps)(List);
