@@ -7,14 +7,27 @@ const mapDispatchToProps = (dispatch) =>{
 }
 
 const Form = (props) => {
-    const [title,setTitle] = useState("")
+    const [title,setTitle] = useState("");
+    const [validation,setValidation] = useState("")
+
 
     const {addArticle} = props;
+ 
     function handleSubmit(e){
         e.preventDefault();
-       setTitle(addArticle({title})) ;
+        if(!title){
+            setValidation("enter title");
+            return;
+        }
+       
+        {
+           
+            setTitle(addArticle({title})) ;
+                console.log("title",title)
+        }
         setTitle("");
-        console.log("title",title)
+        setValidation("");
+        
     }
     return (
         <form onSubmit={handleSubmit}>
@@ -26,7 +39,9 @@ const Form = (props) => {
                     value={title}
                     onChange={(e)=>setTitle(e.target.value)}
                 />
+              
             </div>
+    <p>{validation}</p>
             <button type="submit">SAVE</button>
         </form>
 
